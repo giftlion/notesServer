@@ -1,0 +1,42 @@
+# getting all the users
+GET http://localhost:3000/users
+###
+# creating a new user
+POST http://localhost:3000/users/register
+Content-Type: application/json
+{
+    "email": "nac4922@gmail.com",
+    "password": "123"
+}
+###
+# adding a note to one of the users
+PUT  http://localhost:3000/users/addNote/65e59f562d944eca4cc539e1
+Content-Type: application/json
+
+{
+    "_id": "65e5bd1c6a8a54921a46",
+    "content": "this is a new note",
+    "bgColor": "#f0f0f0",
+    "date": "2021-08-01T00:00:00.000Z",
+    "pin": "false"
+}
+###
+# deleting a note from one of the users
+DELETE http://localhost:3000/users/deleteNote/65e59f562d944eca4cc539e1
+Content-Type: application/json
+{
+    "_id": "65e5bd1c6a8a54921a46e96e"
+}    
+###
+# updating a note from one of the users
+PUT http://localhost:3000/users/editNote/65e59f562d944eca4cc539e1
+Content-Type: application/json
+{
+    "_id": "65e5bd1c6a8a54921a46e96e",
+    "content": "edited note",
+    "bgColor": "#f0f0f0",
+    "date": "2021-08-01T00:00:00.000Z",
+    "pin": "false"
+}
+
+
