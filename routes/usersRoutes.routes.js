@@ -10,22 +10,20 @@ const {
 } = require("../controllers/userController.js");
 const auth = require("../middleware/auth.js");
 
-
 // routes
 router.get("/", getUsers);
 
 router.post("/register", register);
 
-router.post("/login",  login);
+router.post("/login", login);
 
-router.post("/logout", auth , logout);
+router.post("/logout", auth, logout);
 
-router.put("/addNote/:id", auth , addNewNote);
+router.put("/addNote", auth, addNewNote);
 
-router.delete("/deleteNote/:id", auth , deleteNote);
+router.delete("/deleteNote", auth, deleteNote);
 
-router.put("/editNote/:id", auth , editNote);
-
+router.put("/editNote", auth, editNote);
 
 // error handler
 router.use((err, req, res, next) => {

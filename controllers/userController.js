@@ -13,9 +13,10 @@ const usetCtrl = {
   },
   async addNewNote(req, res, next) {
     try {
-      const { _id , content, bgColor, date, pin } = req.body;
-      const user = await User.findById(req.params.id);
-      user.notes.push({_id , content, bgColor, date, pin });
+      const { _id, content, bgColor, date, pin } = req.body;
+      const userid = req.user.id;
+      const user = await User.findById(userid);
+      user.notes.push({ _id, content, bgColor, date, pin });
       await user.save();
       res.status(201).json({ message: "Note added successfully" });
     } catch (error) {
@@ -25,7 +26,8 @@ const usetCtrl = {
   async deleteNote(req, res, next) {
     try {
       const { _id } = req.body;
-      const user = await User.findById(req.params.id);
+      const userid = req.user.id;
+      const user = await User.findById(userid);
       const noteIndex = user.notes.findIndex((note) => note._id === _id);
       user.notes.splice(noteIndex, 1);
       await user.save();
@@ -37,7 +39,8 @@ const usetCtrl = {
   async editNote(req, res, next) {
     try {
       const { _id, content, bgColor, date, pin } = req.body;
-      const user = await User.findById(req.params.id);
+      const userid = req.user.id;
+      const user = await User.findById(userid);
       const note = user.notes.find((note) => note._id.toString() === _id);
       note.content = content;
       note.bgColor = bgColor;
@@ -104,7 +107,8 @@ const usetCtrl = {
     try {
       res.clearCookie("access_token").json({ msg: "logout successfully" });
     } catch (error) {
-      next(error);
+      res.json({ error });
+      // next(error);
     }
   },
 };
